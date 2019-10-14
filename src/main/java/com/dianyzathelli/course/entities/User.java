@@ -1,13 +1,18 @@
 package com.dianyzathelli.course.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tb_user") //muda o nome da tabela para não gerr conflito com o Banco de dados
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -21,6 +26,10 @@ public class User implements Serializable {
 	private String email;
 	private String phone;
 	private String password;
+	
+	// Se trata de UM cliente para Muitos pedidos
+	@OneToMany(mappedBy = "client") //precisa mapear com mappedBy o nome do atributo corretro client que esta do outro lado
+	private List<Order> orders = new ArrayList<>();
 	
 	public User() {
 		
@@ -75,6 +84,10 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
+	public List<Order> getOrders() {
+		return orders;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,6 +112,6 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	
 }
