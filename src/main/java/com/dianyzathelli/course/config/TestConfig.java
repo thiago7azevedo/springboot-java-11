@@ -58,7 +58,7 @@ public class TestConfig implements CommandLineRunner { // implements a interface
 		p4.getCategories().add(cat3);
 		p5.getCategories().add(cat2);
 		
-		productrepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		productrepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5)); 
 		
 		//instanciando objetos da classe User com 5 atributos
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
