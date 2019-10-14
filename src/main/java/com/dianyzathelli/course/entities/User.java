@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 @Entity
 @Table(name = "tb_user") //muda o nome da tabela para não gerr conflito com o Banco de dados
 public class User implements Serializable {
@@ -27,6 +30,7 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 	
+	@JsonIgnore //anotation para evitar loop de chamadas do BD (Associação de mão dupla). Entre assosiações de classes.
 	// Se trata de UM cliente para Muitos pedidos
 	@OneToMany(mappedBy = "client") //precisa mapear com mappedBy o nome do atributo corretro client que esta do outro lado
 	private List<Order> orders = new ArrayList<>();
