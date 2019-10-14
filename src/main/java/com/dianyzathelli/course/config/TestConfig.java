@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.dianyzathelli.course.entities.Category;
 import com.dianyzathelli.course.entities.Order;
 import com.dianyzathelli.course.entities.User;
 import com.dianyzathelli.course.entities.enums.OrderStatus;
+import com.dianyzathelli.course.repositories.CategoryRepository;
 import com.dianyzathelli.course.repositories.OrderRepository;
 import com.dianyzathelli.course.repositories.UserRepository;
 
@@ -24,8 +26,17 @@ public class TestConfig implements CommandLineRunner { // implements a interface
 	@Autowired
 	private OrderRepository orderRepository;
 	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
 	@Override
 	public void run(String... args) throws Exception { // tudo que é colocado aqui é executado quando app é iniciada.
+		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers");
+		
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));// salva no BD
 		
 		//instanciando objetos da classe User com 5 atributos
 		User u1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
@@ -41,7 +52,7 @@ public class TestConfig implements CommandLineRunner { // implements a interface
 //		Fica no horario de Granwitch que é 3 horas a mais do que no brasil.	
 		
 		userRepository.saveAll(Arrays.asList(u1, u2)); // chama userRepository passando lista de objetos para serem inseridos no BD.
-		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
+		orderRepository.saveAll(Arrays.asList(o1, o2, o3)); // salva no BD
 	}
 }
 
