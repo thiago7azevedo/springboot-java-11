@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.dianyzathelli.course.entities.Category;
 import com.dianyzathelli.course.entities.Order;
+import com.dianyzathelli.course.entities.OrderItem;
 import com.dianyzathelli.course.entities.Product;
 import com.dianyzathelli.course.entities.User;
 import com.dianyzathelli.course.entities.enums.OrderStatus;
 import com.dianyzathelli.course.repositories.CategoryRepository;
+import com.dianyzathelli.course.repositories.OrderItemRepository;
 import com.dianyzathelli.course.repositories.OrderRepository;
 import com.dianyzathelli.course.repositories.ProductRepository;
 import com.dianyzathelli.course.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner { // implements a interface
 	
 	@Autowired
 	private ProductRepository productrepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception { // tudo que é colocado aqui é executado quando app é iniciada.
@@ -75,6 +80,14 @@ public class TestConfig implements CommandLineRunner { // implements a interface
 		
 		userRepository.saveAll(Arrays.asList(u1, u2)); // chama userRepository passando lista de objetos para serem inseridos no BD.
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3)); // salva no BD
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+		
 	}
 }
 
