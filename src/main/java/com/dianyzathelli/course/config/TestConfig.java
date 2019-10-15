@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.dianyzathelli.course.entities.Category;
 import com.dianyzathelli.course.entities.Order;
 import com.dianyzathelli.course.entities.OrderItem;
+import com.dianyzathelli.course.entities.Payment;
 import com.dianyzathelli.course.entities.Product;
 import com.dianyzathelli.course.entities.User;
 import com.dianyzathelli.course.entities.enums.OrderStatus;
@@ -88,6 +89,11 @@ public class TestConfig implements CommandLineRunner { // implements a interface
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+//		Neste caso de mão dupla ou um para um (OneToOne) não chama o repository para salvar
+//		adiciona na order o pagamento e chama o save de orderRepository, que o JPA vai salvar no BD
+		orderRepository.save(o1);
 	}
 }
 
