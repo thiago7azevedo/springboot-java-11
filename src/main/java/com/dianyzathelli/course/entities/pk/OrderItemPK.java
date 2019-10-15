@@ -10,7 +10,7 @@ import com.dianyzathelli.course.entities.Order;
 import com.dianyzathelli.course.entities.Product;
 //sempre que quiser fazer uma classe auxiliar, para ser uma chave primaria composta = PK
 
-@Embeddable
+@Embeddable // esta anotation é para classe auxiliar de chave composta
 public class OrderItemPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
