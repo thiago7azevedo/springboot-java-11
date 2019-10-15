@@ -62,6 +62,10 @@ public class OrderItem implements Serializable{
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	// método retornando um Double de getSubtotal ao invés de somente subtotal devido a plataforma Enterprise. Volta no Json um get.
+	public Double getSubTotal() { 
+		return price * quantity;
+	}
 
 	@Override
 	public int hashCode() {
